@@ -22,6 +22,12 @@
                     <x-nav-link :href="route('user.teashops.index')" :active="request()->routeIs('user.teashops.index')">
                         {{ __('Teashops') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('user.brands.index')" :active="request()->routeIs('user.brands.index')">
+                        {{ __('Brands') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('user.teas.index')" :active="request()->routeIs('user.teas.index')">
+                        {{ __('Teas') }}
+                    </x-nav-link>
                 </div>
             </div>
 

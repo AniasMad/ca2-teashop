@@ -7,8 +7,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TeashopController as AdminTeashopController; // admin view
 use App\Http\Controllers\User\TeashopController as UserTeashopController; // user view
 
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\TeaController;
+use App\Http\Controllers\Admin\BrandController as AdminBrandController; // admin view
+use App\Http\Controllers\User\BrandController as UserBrandController; // user view
+
+use App\Http\Controllers\Admin\TeaController as AdminTeaController; // admin view
+use App\Http\Controllers\User\TeaController as UserTeaController; // user view
+
 use App\Http\Controllers\MainmenuController;
 use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\HomeController;
@@ -46,6 +50,16 @@ Route::middleware('auth')->group(function () { // Not able to access withour aut
     Route::resource('/teashops', UserTeashopController::class)->middleware(['auth', 'role:user,admin'])->names('user.teashops')->only(['index', 'show']);
     Route::resource('/admin/teashops', AdminTeashopController::class)->middleware(['auth', 'role:admin'])->names('admin.teashops');
     
+    // brands for users/admins
+
+    Route::resource('/brands', UserBrandController::class)->middleware(['auth', 'role:user,admin'])->names('user.brands')->only(['index', 'show']);
+    Route::resource('/admin/brands', AdminBrandController::class)->middleware(['auth', 'role:admin'])->names('admin.brands');
+
+    // teas for users/admins
+
+    Route::resource('/teas', UserTeaController::class)->middleware(['auth', 'role:user,admin'])->names('user.teas')->only(['index', 'show']);
+    Route::resource('/admin/teas', AdminTeaController::class)->middleware(['auth', 'role:admin'])->names('admin.teas');
+
     // favourites
 
     Route::resource('favourites', FavouriteController::class);

@@ -19,7 +19,7 @@
     <h4 class="text-2xl font-bold dark:text-white">Create Brand</h4>
 </div>
 <div class="px-6 py-3">
-<form action="{{ route('brands.store') }}" method="post">
+<form action="{{ route('admin.brands.store') }}" method="post">
     
     @csrf
     <div class="mb-6">

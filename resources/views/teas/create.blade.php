@@ -18,7 +18,7 @@
     <h4 class="text-2xl font-bold dark:text-white">Create Tea</h4>
 </div>
 <div class="px-6 py-3">
-<form action="{{ route('teas.store') }}" method="post">
+<form action="{{ route('admin.teas.store') }}" method="post">
     
     @csrf
     <div class="mb-6">

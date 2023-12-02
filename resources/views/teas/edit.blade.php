@@ -17,7 +17,7 @@
     <h4 class="text-2xl font-bold dark:text-white">Edit Tea</h4>
 </div>
 <div class="px-6 py-3">
-<form action="{{ route('teas.update', $tea->id) }}" method="post">
+<form action="{{ route('admin.teas.update', $tea->id) }}" method="post">
     
     @csrf
     @method('PUT')

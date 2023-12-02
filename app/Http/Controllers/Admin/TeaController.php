@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Tea;
 use App\Models\Brand;
+use Auth;
 
 class TeaController extends Controller
 {
@@ -13,6 +15,10 @@ class TeaController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->hasRole('admin'))
+        {
+            return to_route('user.books.index');
+        }
         $teas = Tea::orderBy('created_at', 'desc')->paginate(8);
 
         return view('teas.index', [

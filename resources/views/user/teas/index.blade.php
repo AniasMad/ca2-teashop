@@ -7,16 +7,16 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Brand Name
+                    Teashop Name
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Address
+                    Brand
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Phone number
+                    Price
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Country
+                    Description
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Created at
@@ -30,32 +30,32 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($brands as $brand)
+            @forelse($teas as $tea)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $brand->name }}
+                    {{ $tea->name }}
                 </th>
                 <td class="px-6 py-4">
-                    {{ $brand->address }}
+                    {{ $tea->brand->name }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $brand->phone }}
+                    {{ $tea->price }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $brand->country }}
+                    {{ $tea->description }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $brand->created_at }}
+                    {{ $tea->created_at }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $brand->updated_at }}
+                    {{ $tea->updated_at }}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="{{ route('brands.show', $brand->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Show</a>
+                    <a href="{{ route('user.teas.show', $tea->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Show</a>
                 </td>
             </tr>
             @empty
-            <h4>No brands found</h4>
+            <h4>No teas found</h4>
         @endforelse 
         </tbody>
     </table>
@@ -65,8 +65,8 @@
             <strong class="font-bold">{{ session('status') }}</strong>
         </div>
     @endif
-
     <div class="py-1 px-4">
-        <a href="{{ route('brands.create') }}"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button></a>
+        <a href="{{ route('admin.teas.create') }}"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create (Admin Feature)</button></a>
     </div>
+
 @endsection
