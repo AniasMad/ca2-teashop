@@ -19,14 +19,8 @@
                         {{ __('Favourite') }}
                     </x-nav-link>
                     <!-- My own views added here -->
-                    <x-nav-link :href="route('teashops.index')" :active="request()->routeIs('teashops.index')">
+                    <x-nav-link :href="route('user.teashops.index')" :active="request()->routeIs('user.teashops.index')">
                         {{ __('Teashops') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('brands.index')" :active="request()->routeIs('brands.index')">
-                        {{ __('Brands') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('teas.index')" :active="request()->routeIs('teas.index')">
-                        {{ __('Teas') }}
                     </x-nav-link>
                 </div>
             </div>

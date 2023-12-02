@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Teashop;
 use App\Models\Tea;
+use Auth;
 
 class TeashopController extends Controller
 {
@@ -13,9 +15,14 @@ class TeashopController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->hasRole('admin'))
+        {
+            return to_route('user.teashops.index');
+        } 
+
         $teashops = Teashop::orderBy('created_at', 'desc')->paginate(8);
 
-        return view('teashops.index', [
+        return view('admin.teashops.index', [
             'teashops' => $teashops 
         ]);
     }
@@ -25,7 +32,7 @@ class TeashopController extends Controller
      */
     public function create()
     {
-        return view('teashops.create');
+        return view('admin.teashops.create');
     }
 
     /**
@@ -52,7 +59,7 @@ class TeashopController extends Controller
         $teashop->phone = $request->phone;
         $teashop->save();
 
-        return redirect()->route('teashops.index')->with('status', 'Created a new Teashop!');
+        return redirect()->route('admin.teashops.index')->with('status', 'Created a new Teashop!');
     }
 
     /**
@@ -60,8 +67,12 @@ class TeashopController extends Controller
      */
     public function show(string $id)
     {
+        if(!Auth::user()->hasRole('admin'))
+        {
+            return to_route('user.teashops.show');
+        } 
         $teashop = Teashop::findOrFail($id);
-        return view('teashops.show', [
+        return view('admin.teashops.show', [
             'teashop' => $teashop
         ]);
     }
@@ -71,10 +82,14 @@ class TeashopController extends Controller
      */
     public function edit(string $id)
     {
+        if(!Auth::user()->hasRole('admin'))
+        {
+            return to_route('user.teashops.index');
+        } 
         $teashop = Teashop::findOrFail($id);
         $teas = Tea::all();
 
-        return view('teashops.edit', [
+        return view('admin.teashops.edit', [
             'teashop' => $teashop,
             'teas' => $teas 
         ]);
@@ -109,7 +124,7 @@ class TeashopController extends Controller
 
         $teashop->teas()->sync($request->teas);
 
-        return redirect()->route('teashops.index')->with('status', 'Teashop updated!');
+        return redirect()->route('admin.teashops.index')->with('status', 'Teashop updated!');
     }
 
     /**
@@ -120,6 +135,6 @@ class TeashopController extends Controller
         $teashop = Teashop::findOrFail($id);
         $teashop->delete();
 
-        return redirect()->route('teashops.index')->with('status', 'Teashop deleted successfully.');
+        return redirect()->route('admin.teashops.index')->with('status', 'Teashop deleted successfully.');
     }
 }
