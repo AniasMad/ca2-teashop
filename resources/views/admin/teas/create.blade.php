@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 
@@ -18,7 +18,7 @@
     <h4 class="text-2xl font-bold dark:text-white">Create Tea</h4>
 </div>
 <div class="px-6 py-3">
-<form action="{{ route('admin.teas.store') }}" method="post">
+<form enctype="multipart/form-data" action="{{ route('admin.teas.store') }}" method="post">
     
     @csrf
     <div class="mb-6">
@@ -50,6 +50,16 @@
         <option value="{{ $brand->id }}" @if($brand->id == old('brand')) selected @endif>{{ $brand->name }}</option>
     @endforeach
     </select>
+    <input
+        type="file"
+        name="image"
+        placeholder="Image"
+        class="w-full mt-6"
+        field="image"
+        />
+    @if($errors->has('image'))
+        <span class="text-red-500">{{ $errors->first('image') }}</span>
+    @endif
 
     @if($errors->has('brand_id'))
         <span class="text-red-500">{{ $errors->first('brand_id') }}</span>

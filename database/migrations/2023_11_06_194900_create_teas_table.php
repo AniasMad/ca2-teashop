@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('brand_id');            
             $table->float('price', 5, 2);
             $table->text('description');
+            $table->string('image')->default('cover.png');
             $table->timestamps();
 
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');

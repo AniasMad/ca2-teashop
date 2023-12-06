@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage; // uses storage
 use App\Models\Teashop;
 use App\Models\Tea;
 use Auth;
@@ -44,7 +45,8 @@ class TeashopController extends Controller
         $rules = [
             'name' => 'required|string|unique:teashops,name|min:2|max:30',
             'address' => 'required|string|min:5|max:100',
-            'phone' => 'required|string|min:7|max:15'
+            'phone' => 'required|string|min:7|max:15',
+            'image' => 'file|image'
         ];
 
         $messages = [
@@ -57,6 +59,15 @@ class TeashopController extends Controller
         $teashop->name = $request->name;
         $teashop->address = $request->address;
         $teashop->phone = $request->phone;
+
+        // Store the image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = date('Y-m-d-His') . '_' . $request->name . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images', $filename);
+            $teashop->image = $filename;
+        }
+
         $teashop->save();
 
         return redirect()->route('admin.teashops.index')->with('status', 'Created a new Teashop!');
@@ -107,7 +118,8 @@ class TeashopController extends Controller
         $rules = [
             'name' => "required|string|unique:teashops,name,$teashop->id|min:2|max:30",
             'address' => 'required|string|min:5|max:100',
-            'phone' => 'required|string|min:7|max:15'
+            'phone' => 'required|string|min:7|max:15',
+            'image' => 'file|image'
         ];
 
         $messages = [
@@ -120,9 +132,22 @@ class TeashopController extends Controller
         $teashop->name = $request->name;
         $teashop->address = $request->address;
         $teashop->phone = $request->phone;
+
+        if ($request->hasFile('image')) { // Update the image!
+            // Upload new image
+            $newImage = $request->file('image');
+            $filename = date('Y-m-d-His') . '_' . $request->name . '.' . $newImage->getClientOriginalExtension();
+            $newImage->storeAs('public/images/', $filename);
+          
+            if ($teashop->image) { // Delete old image
+                Storage::delete('public/images/' . $teashop->image);
+            }
+
+            $teashop->image = $filename;
+        }
+
         $teashop->save();
 
-        $teashop->teas()->sync($request->teas);
 
         return redirect()->route('admin.teashops.index')->with('status', 'Teashop updated!');
     }
@@ -133,6 +158,9 @@ class TeashopController extends Controller
     public function destroy(string $id)
     {
         $teashop = Teashop::findOrFail($id);
+        if ($teashop->image) { // Delete old image
+            Storage::delete('public/images/' . $teashop->image);
+        }
         $teashop->delete();
 
         return redirect()->route('admin.teashops.index')->with('status', 'Teashop deleted successfully.');

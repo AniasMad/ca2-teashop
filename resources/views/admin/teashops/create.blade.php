@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 
@@ -18,7 +18,7 @@
     <h4 class="text-2xl font-bold dark:text-white">Create Teashop</h4>
 </div>
 <div class="px-6 py-3">
-<form action="{{ route('admin.teashops.store') }}" method="post">
+<form enctype="multipart/form-data" action="{{ route('admin.teashops.store') }}" method="post">
     
     @csrf
     <div class="mb-6">
@@ -42,6 +42,16 @@
         <span class="text-red-500">{{ $errors->first('phone') }}</span>
         @endif
     </div>
+    <input
+        type="file"
+        name="image"
+        placeholder="Image"
+        class="w-full mt-6"
+        field="image"
+        />
+    @if($errors->has('image'))
+        <span class="text-red-500">{{ $errors->first('image') }}</span>
+    @endif
     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
 </form>
 </div>

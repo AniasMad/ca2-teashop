@@ -5,22 +5,43 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Teashop; 
 use App\Models\Tea; 
+use Auth;
 
 class MainmenuController extends Controller
 {
     public function index()
     {
-        $teashops = Teashop::all();
-        return view('mainmenu.index', [
+        $user = Auth::user();
+
+        if($user->hasRole('admin')){
+            $teashops = Teashop::all();
+            return view('admin.mainmenu.index', [
             'teashops' => $teashops,
         ]);
+        }
+        else {
+            $teashops = Teashop::all();
+            return view('user.mainmenu.index', [
+            'teashops' => $teashops,
+        ]);
+        }
+        
     }
 
     public function show(string $id)
     {
+        $user = Auth::user();
         $teashop = Teashop::findOrFail($id);
-        return view('mainmenu.show', [
-            'teashop' => $teashop
-        ]);
+
+        if($user->hasRole('admin')){
+            return view('admin.mainmenu.show', [
+                'teashop' => $teashop
+            ]);
+        }
+        else {
+            return view('user.mainmenu.show', [
+                'teashop' => $teashop
+            ]);
+        }
     }
 }

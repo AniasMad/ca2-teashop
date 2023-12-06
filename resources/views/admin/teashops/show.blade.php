@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 
@@ -9,6 +9,7 @@
     </div>
     <div class="px-6 py-3">
         <!-- Display fields -->
+        <img width="150" src="{{ asset("storage/images/" . $teashop->image) }}" />
         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teashop name</label>
         <input type="text" id="name" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $teashop->name }}" disabled>
         <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>

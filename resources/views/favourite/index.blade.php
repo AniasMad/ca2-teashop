@@ -21,11 +21,13 @@
                     {{ $tea->name }}
                 </th>
                 <td class="px-6 py-4">
-                <form action="{{ route('favourite.destroy', $tea->id) }}" method="POST">
+                <form action="{{ route('removeFromFavourites') }}" method="POST">
                     @csrf
                     @method('DELETE')
+                    <input type="hidden" name="tea_id" value="{{ $tea->id }}">
                     <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
                 </form>
+
                 </td>
             </tr>
             @empty

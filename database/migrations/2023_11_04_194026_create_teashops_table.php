@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->unique(); //unique name for each shop
             $table->string('address');
             $table->string('phone');
+            $table->string('image')->default('cover.png');
             $table->timestamps();
         });
     }

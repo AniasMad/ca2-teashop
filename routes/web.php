@@ -34,17 +34,11 @@ Route::get('/', function () {
 });
 
 
-Route::get('/mainmenu', function () {
-    return view('mainmenu.index');
-})->middleware(['auth', 'verified'])->name('mainmenu.index');
-
+    
 Route::middleware('auth')->group(function () { // Not able to access withour authentication
-    // Route::resource('teashops', TeashopController::class);
-    // Route::resource('brands', BrandController::class);
-    // Route::resource('teas', TeaController::class);
 
-    Route::resource('mainmenu', MainmenuController::class); // home page to redirect to
-
+    Route::resource('/admin/mainmenu', MainmenuController::class)->middleware(['auth', 'role:admin'])->names('admin.mainmenu'); // home page to redirect to
+    Route::resource('/mainmenu', MainmenuController::class)->middleware(['auth', 'role:user,admin'])->names('user.mainmenu');
     // teashops for users/admins
 
     Route::resource('/teashops', UserTeashopController::class)->middleware(['auth', 'role:user,admin'])->names('user.teashops')->only(['index', 'show']);
@@ -62,9 +56,9 @@ Route::middleware('auth')->group(function () { // Not able to access withour aut
 
     // favourites
 
-    Route::resource('favourites', FavouriteController::class);
-    Route::post('/add-to-favourites', [TeaController::class, 'favourite'])->name('addToFavourites');
-    Route::delete('/favourites/{id}', [FavouriteController::class, 'destroy'])->name('favourite.destroy');
+    Route::resource('/favourites', FavouriteController::class);
+    Route::post('/add-to-favourites', [AdminTeaController::class, 'favourite'])->name('addToFavourites');
+    Route::delete('/remove-from-favourites', [AdminTeaController::class, 'removeFavorite'])->name('removeFromFavourites');
     Route::get('/favourites', [FavouriteController::class, 'index'])->name('favourite.index');
 
     // standard profile code

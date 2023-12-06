@@ -1,8 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 
-<h3>Create Brand</h3>
 
 {{-- @if ($errors->any())
     <div class="alert alert-danger">

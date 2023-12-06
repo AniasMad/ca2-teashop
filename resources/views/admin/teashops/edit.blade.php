@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 
@@ -18,10 +18,11 @@
     <h4 class="text-2xl font-bold dark:text-white">Edit Teashop</h4>
 </div>
 <div class="px-6 py-3">
-<form action="{{ route('admin.teashops.update', $teashop->id) }}" method="post">
+<form enctype="multipart/form-data" action="{{ route('admin.teashops.update', $teashop->id) }}" method="post">
     
     @csrf
     @method('PUT')
+    <img width="150" class="mb-4" src="{{ asset("storage/images/" . $teashop->image) }}" alt="Current Image">
     <div class="mb-6">
         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teashop Name</label>
         <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('name') ? : $teashop->name }}" required>
@@ -56,7 +57,18 @@
             @foreach($teas as $tea)
                 <option value="{{ $tea->id }}">{{ $tea->name }}</option>
             @endforeach
-        </select>     
+        </select>  
+
+        <input
+            type="file"
+            name="image"
+            placeholder="Image"
+            class="w-full mt-6"
+            field="image"
+        />
+        @if($errors->has('image'))
+            <span class="text-red-500">{{ $errors->first('image') }}</span>
+        @endif
     </div>
 </div>
 
