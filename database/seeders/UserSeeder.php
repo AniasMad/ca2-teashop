@@ -16,6 +16,8 @@ class UserSeeder extends Seeder
     {
         $role_admin = Role::where('name', 'admin')->first();
 
+        $role_mod = Role::where('name', 'moderator')->first();
+
         $role_user = Role::where('name', 'user')->first();
 
 
@@ -27,6 +29,14 @@ class UserSeeder extends Seeder
         $admin->save();
 
         $admin->roles()->attach($role_admin);
+
+        $mod = new User;
+        $mod->name = "Mod Doe";
+        $mod->email = "mod@mod.com";
+        $mod->password = "testtest";
+        $mod->save();
+
+        $mod->roles()->attach($role_mod);
 
         $user = new User;
         $user->name = "Jane Doe";
