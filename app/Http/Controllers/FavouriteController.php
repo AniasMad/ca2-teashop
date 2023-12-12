@@ -12,10 +12,25 @@ class FavouriteController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $teas = $user->favourites()->get();
 
-        return view('favourite.index', [
+        if($user->hasRole('admin')){
+            $teas = $user->favourites()->get();
+            return view('admin.favourite.index', [
             'teas' => $teas
         ]);
+        }
+        else if($user->hasRole('moderator')) {
+            $teas = $user->favourites()->get();
+            return view('moderator.favourite.index', [
+            'teas' => $teas
+        ]);
+        }
+        else
+        {
+            $teas = $user->favourites()->get();
+            return view('user.favourite.index', [
+            'teas' => $teas
+        ]);
+        }
     }
 }

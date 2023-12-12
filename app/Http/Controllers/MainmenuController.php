@@ -19,7 +19,13 @@ class MainmenuController extends Controller
             'teashops' => $teashops,
         ]);
         }
-        else {
+        else if($user->hasRole('moderator')) {
+            $teashops = Teashop::all();
+            return view('moderator.mainmenu.index', [
+            'teashops' => $teashops,
+        ]);}
+        else if($user->hasRole('user'))
+        {
             $teashops = Teashop::all();
             return view('user.mainmenu.index', [
             'teashops' => $teashops,
@@ -35,6 +41,11 @@ class MainmenuController extends Controller
 
         if($user->hasRole('admin')){
             return view('admin.mainmenu.show', [
+                'teashop' => $teashop
+            ]);
+        }
+        else if($user->hasRole('moderator')){
+            return view('moderator.mainmenu.show', [
                 'teashop' => $teashop
             ]);
         }

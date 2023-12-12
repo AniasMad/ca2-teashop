@@ -16,7 +16,7 @@ class AuthRole
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
         if (!$request->user() || !$request->user()->hasAnyRole($roles)) {
-            return redirect()->route('mainmenu.index');
+            return redirect()->route('user.mainmenu.index');
         }
         return $next($request);
     }

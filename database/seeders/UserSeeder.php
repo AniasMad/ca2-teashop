@@ -30,9 +30,9 @@ class UserSeeder extends Seeder
 
         $admin->roles()->attach($role_admin);
 
-        $mod = new User;
+        $mod = new User; // moderator can only edit, but not delete or create any entity
         $mod->name = "Mod Doe";
-        $mod->email = "mod@mod.com";
+        $mod->email = "mod@mod.com"; 
         $mod->password = "testtest";
         $mod->save();
 
