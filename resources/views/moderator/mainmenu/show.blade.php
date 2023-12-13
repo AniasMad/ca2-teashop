@@ -22,14 +22,14 @@
                     <form method="POST" action="{{ route('addToFavourites') }}">
                         @csrf
                         <input type="hidden" name="tea_id" value="{{ $tea->id }}">
-                        <button type="submit" class="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Add to favourites</button>
+                        <button type="submit" class="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">{{__('Add to favourites')}}</button>
                     </form>
                 </div>
             </div>
         </div>
 
         @empty
-        <h4 class="text-2xl font-bold dark:text-white">No teas available at the moment.</h4>
+        <h4 class="text-2xl font-bold dark:text-white">{{__('No teas available at the moment.')}}</h4>
         @endforelse
     </div>
 </div>

@@ -96,6 +96,11 @@ return [
     |
     */
 
+    'available_locales' => [
+        'English' => 'en',
+        'Ukrainian' => 'ua',
+    ],
+
     'fallback_locale' => 'en',
 
     /*

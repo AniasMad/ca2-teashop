@@ -7,25 +7,25 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Teashop Name
+                    {{__('Tea Name')}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Brand
+                    {{__('Brand')}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Price
+                    {{__('Price')}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Description
+                    {{__('Description')}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Created at
+                    {{__('Created at')}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Updated at
+                    {{__('Updated at')}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Action
+                    {{__('Action')}}
                 </th>
             </tr>
         </thead>
@@ -51,11 +51,11 @@
                     {{ $tea->updated_at }}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="{{ route('user.teas.show', $tea->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Show</a>
+                    <a href="{{ route('user.teas.show', $tea->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{__('Show')}}</a>
                 </td>
             </tr>
             @empty
-            <h4>No teas found</h4>
+            <h4>{{__('No teas found')}}</h4>
         @endforelse 
         </tbody>
     </table>

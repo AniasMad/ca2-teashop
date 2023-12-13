@@ -7,25 +7,25 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Brand Name
+                    {{__('Brand Name')}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Address
+                    {{__('Address')}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Phone number
+                    {{__('Phone number')}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Country
+                    {{__('Country')}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Created at
+                    {{__('Created at')}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Updated at
+                    {{__('Updated at')}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Action
+                    {{__('Action')}}
                 </th>
             </tr>
         </thead>
@@ -51,11 +51,11 @@
                     {{ $brand->updated_at }}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="{{ route('moderator.brands.show', $brand->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Show</a>
+                    <a href="{{ route('moderator.brands.show', $brand->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{__('Show')}}</a>
                 </td>
             </tr>
             @empty
-            <h4>No brands found</h4>
+            <h4>{{__('No brands found')}}</h4>
         @endforelse 
         </tbody>
     </table>

@@ -42,6 +42,13 @@ Route::get('/', function () {
     
 Route::middleware('auth')->group(function () { // Not able to access withour authentication
 
+    Route::get('language/{locale}', function ($locale) { // change webpage language
+        app()->setLocale($locale);
+        session()->put('locale', $locale);
+    
+        return redirect()->back();
+    });
+
     Route::resource('/admin/mainmenu', MainmenuController::class)->middleware(['auth', 'role:admin'])->names('admin.mainmenu'); 
     Route::resource('/mainmenu', MainmenuController::class)->middleware(['auth', 'role:user,admin,moderator'])->names('user.mainmenu');
     Route::resource('/moderator/mainmenu', MainmenuController::class)->middleware(['auth', 'role:moderator'])->names('moderator.mainmenu');

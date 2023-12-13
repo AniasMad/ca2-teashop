@@ -7,22 +7,22 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Teashop Name
+                    {{ __('Teashop Name') }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Address
+                    {{ __('Address') }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Phone number
+                    {{ __('Phone number') }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Created at
+                    {{ __('Created at') }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Updated at
+                    {{ __('Updated at') }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Action
+                    {{ __('Action') }}
                 </th>
             </tr>
         </thead>
@@ -45,11 +45,11 @@
                     {{ $teashop->updated_at }}                  
                 </td>
                 <td class="px-6 py-4">
-                    <a href="{{ route('admin.teashops.show', $teashop->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Show</a>
+                    <a href="{{ route('admin.teashops.show', $teashop->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ __('Show') }}</a>
                 </td>
             </tr>
             @empty
-            <h4>No teashops found</h4>
+            <h4>{{ __('No teashops found') }}</h4>
         @endforelse 
         </tbody>
     </table>
@@ -60,7 +60,7 @@
         </div>
     @endif
     <div class="py-1 px-4">
-        <a href="{{ route('admin.teashops.create') }}"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button></a>
+        <a href="{{ route('admin.teashops.create') }}"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{{ __('Create') }}</button></a>
     </div>
 
 @endsection
